@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
+        //раскоментируй этот метод и закоментируй GetComments();
         //getPosts();
 
          GetComments();
