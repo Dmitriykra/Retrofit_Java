@@ -11,4 +11,8 @@ public interface JsonPlaceHolderApi {
     //строки url
     @GET("posts")
     Call<List<Post>> getPost();
+
+    //добавляем следующий меод для получения определенной ссылки согласно эндпоинту
+    @GET("posts/2/comments")
+    Call<List<Comment>> getComments();
 }

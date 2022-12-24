@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import dmytro.app.retrofitstudy.Model.Comment;
 import dmytro.app.retrofitstudy.Model.JsonPlaceHolderApi;
 import dmytro.app.retrofitstudy.Model.Post;
 import retrofit2.Call;
@@ -18,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private TextView textView;
+    private JsonPlaceHolderApi jsonPlaceHolderApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +29,48 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.result_tv);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://jsonplaceholder.typicode.com/")
-                //.baseUrl("http://www.numbersapi.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
+        //getPosts();
+         GetComments();
+    }
+
+    private void GetComments() {
+        //
+        //Создаем вызов списка из класса-модели и присваеваем ему
+        //метод из интерфейса
+        Call<List<Comment>> call = jsonPlaceHolderApi.getComments();
+        call.enqueue(new Callback<List<Comment>>() {
+            @Override
+            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+                if(!response.isSuccessful()){
+                    textView.setText("Code " + response.body());
+                }
+
+                List<Comment> commentList =  response.body();
+                for (Comment comment : commentList) {
+                    String content = "";
+                    content += "id: " + comment.getId() + "\n";
+                    content += "Post ID: " + comment.getPostId() + "\n";
+                    content += "Name: " + comment.getName() + "\n";
+                    content += "Email: " + comment.getEmail() +"\n";
+                    content += "Text: " + comment.getText() +"\n\n";
+                    textView.append(content);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Comment>> call, Throwable t) {
+                textView.setText(t.getMessage());
+
+            }
+        });
+    }
+
+    private void getPosts() {
         Call<List<Post>> call = jsonPlaceHolderApi.getPost();
 
         call.enqueue(new Callback<List<Post>>() {
@@ -51,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
                     textView.append(content);
                 }
-                //
             }
 
             @Override
