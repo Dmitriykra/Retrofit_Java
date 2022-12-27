@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Retrofit Study</string>
+    <string name="welcome_to_fanny_facts_about_numbers">Welcome to Fanny Facts about Numbers!</string>
+    <string name="enter_any_number">Enter any number</string>
+    <string name="get_fact">Get fact</string>
+    <string name="get_fact_about_random_number">Get fact about random number</string>
+    <string name="history_of_requests_0">History of requests: 0</string>
+    <string name="history">\"History of requests: \"</string>
 </resources>

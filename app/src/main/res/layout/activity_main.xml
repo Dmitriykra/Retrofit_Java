@@ -7,93 +7,130 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
         android:id="@+id/title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to Fanny Facts about Numbers!"
+        android:layout_marginTop="20dp"
+        android:text="@string/welcome_to_fanny_facts_about_numbers"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_margin="10dp"
         android:id="@+id/number_il"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="9dp"
+        android:hint="@string/enter_any_number"
         app:counterMaxLength="20"
-        android:hint="Enter any number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_tv">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/number_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:inputType="numberDecimal"
             app:counterMaxLength="20" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:visibility="gone"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
         android:id="@+id/text_result_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:text=""
         android:textColor="@color/black"
         android:textSize="20dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/number_il" />
 
     <Button
-        android:textSize="20sp"
-        android:backgroundTint="#009688"
-        android:textAllCaps="false"
-        android:layout_margin="10dp"
         android:id="@+id/get_fact_btn"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:text="Get fact"
+        android:layout_margin="10dp"
+        android:backgroundTint="#009688"
+        android:text="@string/get_fact"
+        android:textAllCaps="false"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/text_result_tv"
         app:layout_constraintStart_toStartOf="@+id/text_result_tv"
         app:layout_constraintTop_toBottomOf="@+id/text_result_tv" />
 
     <Button
         android:id="@+id/get_rand_fact_btn"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="64dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="9dp"
         android:backgroundTint="#4CAF50"
-        android:text="Get fact about random number"
+        android:text="@string/get_fact_about_random_number"
         android:textAllCaps="false"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/get_fact_btn" />
 
     <TextView
-        android:textSize="24sp"
-        android:layout_margin="10dp"
         android:id="@+id/previous_requests_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Previous requests"
+        android:layout_margin="10dp"
+        android:text="@string/history_of_requests_0"
+        android:textSize="24sp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/get_rand_fact_btn" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_margin="20dp"
+
+
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/previous_requests_tv">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rec_view_start_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="9dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/previous_requests_tv"
+            tools:listitem="@layout/list_row" />
+
+    </ScrollView>
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rec_view_start_id"
-        app:layout_constraintTop_toBottomOf="@+id/previous_requests_tv"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
